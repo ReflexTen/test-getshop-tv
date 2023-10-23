@@ -221,11 +221,21 @@ body {
   &__label-checkbox {
     display: flex;
     align-items: center;
-    margin-bottom: 25px;
+    margin: -10px;
+    margin-bottom: 15px;
+    padding: 10px;
     color: #565656;
     font-size: 14px;
     line-height: 1.2;
     text-align: left;
+
+    &.panel {
+      &__label-checkbox-focus {
+        padding: 8px;
+        border: 2px solid black;
+        border-radius: 5px;
+      }
+    }
   }
 
   &__button-submit {
