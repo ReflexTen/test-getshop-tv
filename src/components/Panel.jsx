@@ -14,6 +14,7 @@ const Panel = () => {
   const [numberPhone, setNumberPhone] = useState([])
 
   const [isActiveButton, setIsActiveButton] = useState(false)
+  const [isChecked, setIsChecked] = useState(false)
 
   const handleKeyPress = key => {
     if (numberPhone.length === 10) {
@@ -85,6 +86,9 @@ const Panel = () => {
       // e.preventDefault()
       if (currentNum === 11) {
         handleKeyPress(0)
+      } else if (currentNum === 'checkbox') {
+        setIsChecked(!isChecked)
+        setIsActiveButton(!isActiveButton)
       } else if (currentNum === 10) {
         delNum()
       } else {
@@ -115,11 +119,13 @@ const Panel = () => {
       if (currentNum === 11) {
         setCurrentNum(currentNum - 2)
         return
-      }
-      if (currentNum === 1 || currentNum === 2 || currentNum === 3) {
+      } else if (currentNum === 1 || currentNum === 2 || currentNum === 3) {
         return
-      }
-      if (currentNum === 'x') {
+      } else if (currentNum === 'checkbox') {
+        setCurrentNum(10)
+      } else if (currentNum === 'confirm') {
+        setCurrentNum('checkbox')
+      } else if (currentNum === 'x') {
         return
       } else {
         setCurrentNum(currentNum - 3)
@@ -129,6 +135,10 @@ const Panel = () => {
     if (e.key === 'ArrowDown') {
       if (currentNum === 8 || currentNum === 9) {
         setCurrentNum(currentNum + 2)
+      } else if (currentNum === 10 || currentNum === 11) {
+        setCurrentNum('checkbox')
+      } else if (currentNum === 'checkbox') {
+        setCurrentNum('confirm')
       } else if (currentNum === 'x') {
         return
       } else {
@@ -144,7 +154,7 @@ const Panel = () => {
     return () => {
       window.removeEventListener('keydown', kp)
     }
-  }, [numberPhone, currentNum])
+  }, [numberPhone, currentNum, isChecked, isActiveButton])
 
   return (
     <div className="promo">
@@ -176,13 +186,13 @@ const Panel = () => {
             })}
           </div>
 
-          <label className="panel__label-checkbox">
-            <input onChange={() => setIsActiveButton(!isActiveButton)} className="panel__checkbox sr-only" type="checkbox" name="panel__checkbox" id="panel__checkbox" required />
+          <label className={`panel__label-checkbox ${currentNum === 'checkbox' ? 'panel__label-checkbox-focus' : ''}`}>
+            <input onClick={() => setIsChecked(!isChecked)} onChange={() => setIsActiveButton(!isActiveButton)} checked={isChecked} className="panel__checkbox " type="checkbox" name="panel__checkbox" id="panel__checkbox" required />
             <span className="panel__castom-checbox"></span>
             <span className="panel__label-text">Согласие на обработку персональных данных</span>
           </label>
 
-          <button className="panel__button panel__button--submit" type="submit" disabled={numberPhone.length === 10 && isActiveButton ? false : true}>
+          <button className={`panel__button panel__button--submit ${currentNum === 'confirm' ? 'panel__button-focus' : ''}`} type="submit" disabled={numberPhone.length === 10 && isActiveButton ? false : true}>
             Подтвердить номер
           </button>
         </form>
