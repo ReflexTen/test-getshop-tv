@@ -4,7 +4,7 @@ import React from 'react'
 import InputMask from 'react-input-mask'
 // import useKeyboard from '../test/useKeyboard'
 
-const Panel = () => {
+const Panel = ({ showScreen }) => {
   const buttonArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 'стереть', 0]
 
   const [currentNum, setCurrentNum] = useState(5)
@@ -32,7 +32,6 @@ const Panel = () => {
 
   const sendForm = () => {
     if (isChecked) {
-      setNumberPhone([])
       setCurrentNum('x')
       setFormSubmit(true)
       setIsChecked(false)
@@ -41,6 +40,7 @@ const Panel = () => {
   }
 
   const clearForm = () => {
+    setNumberPhone([])
     setFormSubmit(false)
     setCurrentNum(5)
   }
@@ -177,21 +177,33 @@ const Panel = () => {
     }
   }, [numberPhone, currentNum, isChecked])
 
+  useEffect(() => {
+    if (numberPhone.length === 10) {
+      fetch(`http://apilayer.net/api/validate?access_key=3c68f839d0e97c8d7bc76fd410f13670&number=${numberPhone.join('')}&country_code=RU&format=10`)
+        .then(res => res.json())
+        .then(json => {
+          console.log(json)
+          console.log(json.valid)
+        })
+        .catch(err => console.error(err))
+    }
+  }, [numberPhone])
+
   return (
-    <div className="promo">
-      <div className="panel">
+    <div className='promo'>
+      <div className='panel'>
         {!formSubmit ? (
-          <div className="panel__wrapper">
-            <div className="panel__title">Введите ваш номер мобильного телефона</div>
+          <div className='panel__wrapper'>
+            <div className='panel__title'>Введите ваш номер мобильного телефона</div>
 
-            <form className="panel__form">
-              <InputMask className="panel__input" name="panel__input" placeholder="+7(___)___-__-__" value={numberPhone.join('')} mask="+7(999)999-99-99" readOnly />
+            <form className='panel__form'>
+              <InputMask className='panel__input' name='panel__input' placeholder='+7(___)___-__-__' value={numberPhone.join('')} mask='+7(999)999-99-99' readOnly />
 
-              <label className="panel__label-input" htmlFor="panel__input">
+              <label className='panel__label-input' htmlFor='panel__input'>
                 и с Вами свяжется наш менеждер для дальнейшей консультации
               </label>
 
-              <div className="panel__button-box">
+              <div className='panel__button-box'>
                 {buttonArr.map((item, idx) => {
                   if (item === 'стереть') {
                     return (
@@ -210,9 +222,9 @@ const Panel = () => {
               </div>
 
               <label className={`panel__label-checkbox ${currentNum === 'checkbox' ? 'panel__label-checkbox-focus' : ''}`}>
-                <input onClick={() => setIsChecked(!isChecked)} onChange={() => setIsActiveButton(!isActiveButton)} checked={isChecked} className="panel__checkbox" type="checkbox" name="panel__checkbox" id="panel__checkbox" required />
-                <span className="panel__castom-checbox"></span>
-                <span className="panel__label-text">Согласие на обработку персональных данных</span>
+                <input onClick={() => setIsChecked(!isChecked)} onChange={() => setIsActiveButton(!isActiveButton)} checked={isChecked} className='panel__checkbox sr-only' type='checkbox' name='panel__checkbox' id='panel__checkbox' required />
+                <span className='panel__castom-checbox'></span>
+                <span className='panel__label-text'>Согласие на обработку персональных данных</span>
               </label>
 
               <button
@@ -221,7 +233,7 @@ const Panel = () => {
                   e.preventDefault()
                   sendForm()
                 }}
-                type="submit"
+                type='submit'
                 disabled={numberPhone.length === 10 && isActiveButton ? false : true}
               >
                 Подтвердить номер
@@ -229,15 +241,22 @@ const Panel = () => {
             </form>
           </div>
         ) : (
-          <div className="panel__confirm">
-            <div className="panel__confirm-title">заявка принята</div>
-            <div className="panel__confirm-subtitle">Держите телефон под рукой.</div>
-            <div className="panel__confirm-subtitle">Скоро с Вами свяжется наш менеджер. </div>
+          <div className='panel__confirm'>
+            <div className='panel__confirm-title'>заявка принята</div>
+            <div className='panel__confirm-subtitle'>Держите телефон под рукой.</div>
+            <div className='panel__confirm-subtitle'>Скоро с Вами свяжется наш менеджер. </div>
           </div>
         )}
       </div>
 
-      <button onClick={clearForm} onMouseEnter={() => setCurrentNum('x')} className={`promo__close-button ${currentNum === 'x' ? 'promo__close-button-focus' : ''}`}></button>
+      <button
+        onClick={() => {
+          clearForm()
+          showScreen(false)
+        }}
+        onMouseEnter={() => setCurrentNum('x')}
+        className={`promo__close-button ${currentNum === 'x' ? 'promo__close-button-focus' : ''}`}
+      ></button>
     </div>
   )
 }
