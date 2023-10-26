@@ -58,6 +58,15 @@ body {
     object-fit: cover;
   }
 
+  &__volume-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 5px 10px;
+    background: #86d3f4;
+    font-size: 12px;
+  }
+
   // .promo-video__baner
   &__baner {
     position: absolute;
@@ -96,15 +105,22 @@ body {
     width: 156px;
     padding: 16px;
     background: #fff;
-
     font-size: 16px;
-
     font-weight: 500;
+
+    &--focus {
+      background-color: #000;
+      color: #fff;
+    }
   }
 }
 
 .show {
   transform: translateY(0);
+}
+
+.hide-screen {
+  display: none;
 }
 
 .number-entry-screen {
