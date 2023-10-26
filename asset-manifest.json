@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/test-getshop-tv/static/css/main.545e92c3.css",
+    "main.js": "/test-getshop-tv/static/js/main.1b9c9261.js",
+    "static/media/video-bg.mp4": "/test-getshop-tv/static/media/video-bg.650ad194ea7d3b2a00f8.mp4",
+    "static/media/promo-bg.png": "/test-getshop-tv/static/media/promo-bg.c5935bdd2a01dae1d91d.png",
+    "static/media/Roboto-Italic.woff": "/test-getshop-tv/static/media/Roboto-Italic.782bf0708f35eb417a95.woff",
+    "static/media/Roboto-Medium.woff": "/test-getshop-tv/static/media/Roboto-Medium.256cf49485adf1a47afb.woff",
+    "static/media/Roboto-Bold.woff": "/test-getshop-tv/static/media/Roboto-Bold.a871469800d64908f383.woff",
+    "static/media/Roboto-Regular.woff": "/test-getshop-tv/static/media/Roboto-Regular.f7d828ab0531eb358742.woff",
+    "static/media/Roboto-Light.woff": "/test-getshop-tv/static/media/Roboto-Light.872e1a66f7750148b79e.woff",
+    "static/media/Roboto-Italic.woff2": "/test-getshop-tv/static/media/Roboto-Italic.854d15734f51cd8750f7.woff2",
+    "static/media/Roboto-Medium.woff2": "/test-getshop-tv/static/media/Roboto-Medium.70ace3870f471997ceb7.woff2",
+    "static/media/Roboto-Bold.woff2": "/test-getshop-tv/static/media/Roboto-Bold.002079d85a6f27587d17.woff2",
+    "static/media/Roboto-Regular.woff2": "/test-getshop-tv/static/media/Roboto-Regular.8ebaa20606662c25529e.woff2",
+    "static/media/Roboto-Light.woff2": "/test-getshop-tv/static/media/Roboto-Light.f6da29cb69bf738928ee.woff2",
+    "index.html": "/test-getshop-tv/index.html",
+    "main.545e92c3.css.map": "/test-getshop-tv/static/css/main.545e92c3.css.map",
+    "main.1b9c9261.js.map": "/test-getshop-tv/static/js/main.1b9c9261.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.545e92c3.css",
+    "static/js/main.1b9c9261.js"
+  ]
+}
